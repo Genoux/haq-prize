@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { CHOICES } from '@/app/data/constants';
 import { Wheel } from 'react-custom-roulette'
-import WheelLabel from './WheelLabel';
+import WheelLabel from '@/app/components/WheelLabel';
 import { Button } from "@/app/components/ui/button"
 
 const data = CHOICES

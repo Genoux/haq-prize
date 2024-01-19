@@ -1,4 +1,3 @@
-import Image from "next/image";
 import RandomWheel from "@/app/components/TheWheel";
 
 export default function Home() {

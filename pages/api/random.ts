@@ -28,6 +28,5 @@ function getWinningSegment(choices: any[]) {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const winningIndex = getWinningSegment(CHOICES);
-    console.log("handler - winningIndex:", winningIndex);
     res.status(200).json({ winnerIndex: winningIndex });
 }
