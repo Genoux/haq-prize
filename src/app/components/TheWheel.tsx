@@ -53,7 +53,7 @@ const RandomWheel = () => {
         }}
         />
         
-        <Button variant="outline" onClick={handleSpinClick}>Button</Button>
+        <Button variant="outline" onClick={handleSpinClick}>GO!</Button>
     </div>
     </div>
   );
