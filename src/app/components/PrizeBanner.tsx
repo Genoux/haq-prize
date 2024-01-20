@@ -7,10 +7,12 @@ import Link from 'next/link';
 const PrizeBanner = ({ winner = '1', isVisible, prizeNumber, onSpinAgain }: { winner: string, isVisible: boolean, prizeNumber: number, onSpinAgain: () => void }) => {
 
   useEffect(() => {
+
+    if (isVisible) {
       let duration = prizeNumber * 100;
       let end = Date.now() + duration;
 
-      const frame = function() {
+      const frame = function () {
         confetti({
           particleCount: 100,
           startVelocity: 30,
@@ -26,10 +28,11 @@ const PrizeBanner = ({ winner = '1', isVisible, prizeNumber, onSpinAgain }: { wi
         }
       }
 
-      // Call the frame function
       frame();
+    }
+
   }, [isVisible, prizeNumber]);
-  
+
 
   return (
     <motion.div
@@ -46,9 +49,9 @@ const PrizeBanner = ({ winner = '1', isVisible, prizeNumber, onSpinAgain }: { wi
         transition={{ duration: 0.5, delay: 0.5 }}
       >
 
-<Button onClick={onSpinAgain} className='mt-4'>
-            Spin Again
-          </Button>
+        <Button onClick={onSpinAgain} className='mt-4'>
+          Spin Again
+        </Button>
       </motion.div>
     </motion.div>
   );
