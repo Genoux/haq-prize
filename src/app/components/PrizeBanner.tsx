@@ -7,13 +7,10 @@ import Link from 'next/link';
 const PrizeBanner = ({ winner = '1', isVisible, prizeNumber, onSpinAgain }: { winner: string, isVisible: boolean, prizeNumber: number, onSpinAgain: () => void }) => {
 
   useEffect(() => {
-    // Check if window is defined (i.e., running on the client)
-    if (typeof window !== "undefined" && isVisible) {
-      // Your existing code that uses 'window'
       let duration = prizeNumber * 100;
       let end = Date.now() + duration;
-  
-      (function frame() {
+
+      const frame = function() {
         confetti({
           particleCount: 100,
           startVelocity: 30,
@@ -23,12 +20,14 @@ const PrizeBanner = ({ winner = '1', isVisible, prizeNumber, onSpinAgain }: { wi
             y: Math.random() - 0.2
           }
         });
-  
+
         if (Date.now() < end) {
           requestAnimationFrame(frame);
         }
-      })();
-    }
+      }
+
+      // Call the frame function
+      frame();
   }, [isVisible, prizeNumber]);
   
 

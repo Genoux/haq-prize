@@ -2,15 +2,19 @@
 
 import React, { use, useEffect, useState } from 'react';
 import { CHOICES } from '@/app/data/constants';
-import { Wheel } from 'react-custom-roulette'
 import WheelLabel from '@/app/components/WheelLabel';
 import { Button } from "@/app/components/ui/button"
-import confetti from "canvas-confetti"
 import PrizeBanner from "@/app/components/PrizeBanner"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 const data = CHOICES
+
+const Wheel = dynamic(
+  () => import('react-custom-roulette').then((mod) => mod.Wheel),
+  { ssr: false }
+);
 
 const RandomWheel = () => {
   const [mustSpin, setMustSpin] = useState(false);
@@ -35,7 +39,6 @@ const RandomWheel = () => {
   const spinStopped = () => {
     setMustSpin(false);
     setShowPrizeBanner(true);
-    confetti();
   }
 
   return (
