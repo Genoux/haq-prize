@@ -7,7 +7,7 @@ const WheelLabel = ({ color, label }: { color: string, label: string }) => {
 
   return (
     <div className='flex gap-2 items-center'>
-      <div className="w-6 h-6 rounded-full" style={style}></div>
+      <div className="w-5 h-5 rounded-full" style={style}></div>
       <p>{label}</p>
     </div>
   );

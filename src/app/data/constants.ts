@@ -1,7 +1,7 @@
 export const CHOICES = [
-  { option: '', optionSize: 44, style: { backgroundColor: '#393939' }, image: { uri: 'https://dummyimage.com/600x400/000/fff'} },
-  { option: '', optionSize: 23, style: { backgroundColor: '#DFA718' } },
-  { option: '', optionSize: 15, style: { backgroundColor: '#2545ED' } },
-  { option: '', optionSize: 10, style: { backgroundColor: '#5200FF' } },
-  { option: '', optionSize: 8, style: { backgroundColor: '#FF2459' } },
+  { name:'Skin mystère', option: '', optionSize: 44, style: { backgroundColor: '#393939' }},
+  { name:'Skin Mystère +950', option: '', optionSize: 23, style: { backgroundColor: '#DFA718' } },
+  { name:'Skin Légendaire', option: '', optionSize: 15, style: { backgroundColor: '#2545ED' } },
+  { name:'Skin ULTIMATE', option: '', optionSize: 10, style: { backgroundColor: '#5200FF' } },
+  { name:'Commentateur décide', option: '', optionSize: 8, style: { backgroundColor: '#FF2459' } },
 ];
