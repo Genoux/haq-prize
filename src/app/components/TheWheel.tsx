@@ -75,7 +75,7 @@ const RandomWheel = () => {
                 spinStopped();
               }}
             />
-            <Button className='w-1/2' onClick={handleSpinClick}>GO!</Button>
+            <Button className='w-1/2' onClick={handleSpinClick} disabled={mustSpin}>GO!</Button>
           </div>
         </motion.div>
         <PrizeBanner isVisible={showPrizeBanner} winner={CHOICES[prizeNumber]?.name} prizeNumber={prizeNumber} onSpinAgain={resetGame}  />
