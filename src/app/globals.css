@@ -75,4 +75,7 @@
   }
 }
 
-
+.fade-lr {
+  margin: 0 auto;
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}

@@ -10,7 +10,7 @@ export default function Home() {
     <motion.div>
       <main className="flex flex-col items-center justify-between">
         <TheWheel2 />
-
+        <RandomWheel />
       </main>
       </motion.div>
   );
