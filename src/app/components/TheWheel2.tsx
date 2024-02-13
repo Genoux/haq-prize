@@ -4,12 +4,13 @@ import 'react-roulette-pro/dist/index.css';
 import { Button } from "@/app/components/ui/button"
 
 const prizes = [
-  { name: 'Skin mystère', id: '7d24b681-82d9-4fc0-b034-c82f9db11a59', image: '/images/Skinmystère.png' },
-  { name: 'Skin Mystère +950', id: '9da9a287-952f-41bd-8c7a-b488938d7c7a', image: '/images/SkinMystère950.png' },
-  { name: 'Skin Légendaire', id: '04106f3f-f99f-47e4-a62e-3c81fc8cf794', image: '/images/SkinLégendaire.png' },
-  { name: 'Skin ULTIMATE', id: '23c551bf-8425-4ffd-b7c2-77c87844f89d', image: '/images/SkinULTIMATE.png' },
-  { name: 'Choix des commentateurs', id: 'e4060930-538f-4bf7-ab8e-8d2aa05fba43', image: '/images/Choixdescommentateurs.png' },
+  { text: 'Skin mystère', image: '/images/Skinmystère.png' },
+  { text: 'Skin Mystère +950', image: '/images/SkinMystère950.png' },
+  { text: 'Skin Légendaire', image: '/images/SkinLégendaire.png' },
+  { text: 'Skin ULTIMATE', image: '/images/SkinULTIMATE.png' },
+  { text: 'Choix des commentateurs', image: '/images/Choixdescommentateurs.png' },
 ];
+
 
 const reproductionArray = (array = [], length = 0) => [
   ...Array(length).fill('_').map(() => array[Math.floor(Math.random() * array.length)]),
@@ -29,8 +30,6 @@ const getPrizeIndex = async () => {
   return index;
 };
 
-
-
 const RouletteSpinner = () => {
   const [prizeIndex, setPrizeIndex] = useState(0);
   const [start, setStart] = useState(false);
@@ -39,12 +38,8 @@ const RouletteSpinner = () => {
 
   const handlePrizeDefined = () => {
     setIsRolling(false);
-    const name = prizeList[prizeIndex].name;
+    const name = prizeList[prizeIndex].text;
     setWinnerPrize(name as any);
-    setTimeout(() => {
-      setWinnerPrize(null);
-      setIsRolling(true);
-    }, 1000);
     console.log("Prize Defined", prizeList[prizeIndex]);
   };
 
@@ -87,6 +82,12 @@ const RouletteSpinner = () => {
         <div className="relative h-full fade-lr w-3/4">
           <div className='mx-auto'>
             <RoulettePro
+              // prizeItemRenderFunction={(prize) => (
+              //   <div className="flex items-center justify-center">
+              //     <img src={prize.image} alt={prize.text} className="w-24 h-24" />
+              //     <p className="text-white text-3xl">{prize.text}</p>
+              //   </div>
+              // )}
               prizes={prizeList}
               prizeIndex={prizeIndex}
               spinningTime={15}
