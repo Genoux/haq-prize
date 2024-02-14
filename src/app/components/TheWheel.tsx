@@ -23,7 +23,7 @@ const _skinmystere = duplicateObjectsInArray({
   image: '/images/Skinmystère.png',
   text: 'Skin mystère',
   odds: .9, // Example odds
-}, 10);
+}, 9);
 
 const _skinmystere950 = duplicateObjectsInArray({
   id: '7d24b681-82d9-4fc0-b034-c82f9db11a59',
@@ -36,8 +36,8 @@ const _skinlegendaire = duplicateObjectsInArray({
   id: '9da9a287-952f-41bd-8c7a-b488938d7c7a',
   image: '/images/SkinLégendaire.png',
   text: 'Skin Légendaire',
-  odds: .3, // Example odds
-}, 4);
+  odds: .2, // Example odds
+}, 2);
 
 const _skinultimate = duplicateObjectsInArray({
   id: '04106f3f-f99f-47e4-a62e-3c81fc8cf794',
@@ -50,7 +50,7 @@ const _choixdescommentateurs = duplicateObjectsInArray({
   id: '23c551bf-8425-4ffd-b7c2-77c87844f89d',
   image: '/images/Choixdescommentateurs.png',
   text: 'Choix des commentateurs',
-  odds: .05, // Example odds
+  odds: .1, // Example odds
 }, 1);
 
 const prizes: Prizes[] = [
