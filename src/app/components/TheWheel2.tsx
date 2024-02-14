@@ -1,109 +1,105 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RoulettePro from 'react-roulette-pro';
 import 'react-roulette-pro/dist/index.css';
 import { Button } from "@/app/components/ui/button"
 
-const prizes = [
-  { text: 'Skin mystère', image: '/images/Skinmystère.png' },
-  { text: 'Skin Mystère +950', image: '/images/SkinMystère950.png' },
-  { text: 'Skin Légendaire', image: '/images/SkinLégendaire.png' },
-  { text: 'Skin ULTIMATE', image: '/images/SkinULTIMATE.png' },
-  { text: 'Choix des commentateurs', image: '/images/Choixdescommentateurs.png' },
+interface Prize {
+  text: string;
+  image: string;
+  odds: number;
+}
+
+const prizes: Prize[] = [
+  { text: 'Skin mystère', image: '/images/Skinmystère.png', odds: 25 },
+  { text: 'Skin Mystère +950', image: '/images/SkinMystère950.png', odds: 25 },
+  { text: 'Skin Légendaire', image: '/images/SkinLégendaire.png', odds: 25 },
+  { text: 'Skin ULTIMATE', image: '/images/SkinULTIMATE.png', odds: 25 },
+  { text: 'Choix des commentateurs', image: '/images/Choixdescommentateurs.png', odds: 25 },
 ];
 
-
-const reproductionArray = (array = [], length = 0) => [
-  ...Array(length).fill('_').map(() => array[Math.floor(Math.random() * array.length)]),
-];
-
-const prizeList = [
-  ...prizes,
-  ...reproductionArray(prizes, prizes.length * 5),
-  ...prizes,
-  ...reproductionArray(prizes, prizes.length),
-];
-
-let i = 0;
-const getPrizeIndex = async () => {
-  const index = prizes.length * 6 + i;
-  i = (i + 1) % prizes.length; // Cycle through prizes repeatedly
-  return index;
+const generatePrizeList = (prizes: Prize[]): Prize[] => {
+  let prizeList: Prize[] = [];
+  prizes.forEach((prize) => {
+    for (let i = 0; i < prize.odds; i++) {
+      prizeList.push(prize);
+    }
+  });
+  return prizeList;
 };
 
-const RouletteSpinner = () => {
-  const [prizeIndex, setPrizeIndex] = useState(0);
+const shuffleArray = (array: Prize[]): Prize[] => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
+const prizeList = shuffleArray(generatePrizeList(prizes));
+
+const RouletteSpinner: React.FC = () => {
+  const [prizeIndex, setPrizeIndex] = useState<number | null>(null);
   const [start, setStart] = useState(false);
   const [isRolling, setIsRolling] = useState(false);
-  const [winnerPrize, setWinnerPrize] = useState(null) ;
-
-  const handlePrizeDefined = () => {
-    setIsRolling(false);
-    const name = prizeList[prizeIndex].text;
-    setWinnerPrize(name as any);
-    console.log("Prize Defined", prizeList[prizeIndex]);
-  };
-
-  useEffect(() => {
-    if (prizeIndex && !start) {
-      console.log("Starting spin");
-      setTimeout(() => {
-        setStart(true);
-      }, 0);
-    }
-  }, [prizeIndex, start]);
-
-  useEffect(() => {
-    if (!isRolling) return;
-
-    const prepareSpin = async () => {
-      const newPrizeIndex = await getPrizeIndex();
-      console.log("prepareSpin - newPrizeIndex:", prizeList[newPrizeIndex]);
-      setPrizeIndex(prev => prev === newPrizeIndex ? newPrizeIndex - 1 : newPrizeIndex);
-      setStart(false);
-    };
-
-    prepareSpin();
-  }, [isRolling]);
+  const [winnerPrize, setWinnerPrize] = useState<string | null>(null);
 
   const initiateSpin = async () => {
     if (!isRolling) {
       setWinnerPrize(null);
       setIsRolling(true);
-      await getPrizeIndex(); // Ensure we have the next prize index ready
+
+      // Select a random prize index based on length of prizeList
+      const prizeIndexForWheel = Math.floor(Math.random() * prizeList.length);
+
+      // Now set the prizeIndex with the one found for the wheel
+      setPrizeIndex(prizeIndexForWheel);
+      setStart(true);
+    }
+  };
+
+  const handlePrizeDefined = () => {
+    setIsRolling(false);
+    setStart(false);
+    if (prizeIndex !== null) {
+      setWinnerPrize(prizeList[prizeIndex].text);
+      console.log("Prize Defined", prizeList[prizeIndex]);
     }
   };
 
   return (
-    <div className='flex h-screen justify-center items-center'>
-      <div className='absolute w-[1920px] flex flex-col items-center justify-center gap-24'>
-        <div className='h-12 '>
-        <p>{winnerPrize}</p>
-      </div>
-        <div className="relative h-full fade-lr w-3/4">
-          <div className='mx-auto'>
-            <RoulettePro
-              // prizeItemRenderFunction={(prize) => (
-              //   <div className="flex items-center justify-center">
-              //     <img src={prize.image} alt={prize.text} className="w-24 h-24" />
-              //     <p className="text-white text-3xl">{prize.text}</p>
-              //   </div>
-              // )}
-              prizes={prizeList}
-              prizeIndex={prizeIndex}
-              spinningTime={15}
-              start={start}
-              onPrizeDefined={handlePrizeDefined}
-              options={{
-                stopInCenter: true,
-                withoutAnimation: true,
-              }}
-            />
+    <>
+      <pre>Rolling: {isRolling.toString()}</pre>
+      <pre>Winner: {winnerPrize?.toString() || 'Null'}</pre>
+
+      <div className='flex h-screen justify-center items-center'>
+        <div className='absolute w-[1920px] flex flex-col items-center justify-center gap-24'>
+          <div className='h-12 '>
+            <p>{winnerPrize?.toString()}</p>
           </div>
-          <div className="absolute z-50 top-0 left-0 w-full h-full bg-gradient-to-l from-black via-transparent to-black"></div>
+          <div className="relative h-full fade-lr w-3/4">
+            <div className='mx-auto'>
+              <RoulettePro
+                prizes={prizeList as Prize[]}
+                prizeIndex={prizeIndex as number}
+                spinningTime={10}
+                start={start}
+                options={{
+                  withoutAnimation: true,
+                  stopInCenter: true,
+                }}
+                onPrizeDefined={handlePrizeDefined}
+              />
+            </div>
+          </div>
+          <div className='h-12'>
+            <Button onClick={initiateSpin} disabled={isRolling}>
+              Spin
+            </Button>
+          </div>
         </div>
-        <Button className='p-4' onClick={initiateSpin} disabled={isRolling}>Spin</Button>
       </div>
-    </div>
+
+    </>
   );
 };
 
