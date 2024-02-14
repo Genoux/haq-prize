@@ -41,22 +41,17 @@ const PrizeBanner = ({ winner = '1', isVisible, prizeNumber, onSpinAgain }: { wi
       <motion.div
         initial={{ opacity: 0, zIndex: -1 }}
         animate={{ opacity: isVisible ? 1 : 0, zIndex: isVisible ? 50 : -1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        transition={{ duration: 0.25, delay: 0 }}
         exit={{ opacity: 0, zIndex: -1 }}
         className='flex flex-col justify-center items-center h-screen gap-6 absolute z-50 backdrop-blur-lg w-full top-0 left-0'>
         <div className='text-5xl font-black'>
           {winner ? `${winner}` : ''}
         </div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-
+        <div>
           <Button onClick={onSpinAgain} className='mt-4'>
             Spin Again
           </Button>
-        </motion.div>
+        </div>
       </motion.div>
     </AnimatePresence>
   );
