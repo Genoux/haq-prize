@@ -13,11 +13,11 @@ interface ImageInfo {
 }
 
 export const prizesList: ImageInfo[] = [
-  { name: "Skin Mystère", src: "/images/Skinmystère.png", weight: 90 },
-  { name: "Skin Mystère 950", src: "/images/Skinmystère950.png", weight: 70 },
-  { name: "Skin Légendaire", src: "/images/SkinLégendaire.png", weight: 50 },
-  { name: "Skin Ultimate", src: "/images/SkinULTIMATE.png", weight: 25 },
-  { name: "Choix des commentateurs", src: "/images/Choixdescommentateurs.png", weight: 10 },
+  { name: "Skin Mystère", src: "/images/mystere.png", weight: 90 },
+  { name: "Skin Mystère 950", src: "/images/mystere950.png", weight: 70 },
+  { name: "Skin Légendaire", src: "/images/legendaire.png", weight: 50 },
+  { name: "Skin Ultimate", src: "/images/ultimate.png", weight: 25 },
+  { name: "Choix des commentateurs", src: "/images/casterchoice.png", weight: 10 },
 ];
 
 function lerp(start: number, end: number, t: number): number {
