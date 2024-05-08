@@ -148,7 +148,6 @@ const TheWheel = () => {
 
   return (
     <div>
-      <PrizeBanner isVisible={showPrizeBanner} winner={winnerObject.text} prizeNumber={winnerObject.odds} onSpinAgain={() => { setShowPrizeBanner(false) }}  />
       <div className='relative overflow-hidden'>
         <div className="absolute z-20 top-0 left-0 w-full h-full bg-gradient-to-l from-black via-transparent to-black"></div>
         <RoulettePro
