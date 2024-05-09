@@ -89,7 +89,7 @@ export const RandomPrizePicker = () => {
         } else {
           setCurrentPrize(chosenPrize);
           setWinner(chosenPrize.name);
-          setTimeout(() => setShowPrizeBanner(true), 1250);
+          setTimeout(() => setShowPrizeBanner(true), 300);
         }
       }, newInterval);
     };
