@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/app/components/ui/button';
 import confetti from 'canvas-confetti';
 import { useEffect } from 'react';
-import Link from 'next/link';
 import HaqBadge from './HaqBadge';
 import Image from 'next/image';
 import { X } from 'lucide-react';
@@ -55,21 +54,21 @@ const PrizeBanner = ({ winner, isVisible, prizeNumber, onSpinAgain }: { winner: 
         </p>
       </div>
       <div className='flex flex-col gap-4 justify-center items-center'>
-       
+
         <h2 className='font-semibold'>Offert par</h2>
         <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          exit={{ opacity: 0 }}
-        >
-          <HaqBadge />
+          <motion.div
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            exit={{ opacity: 0 }}
+          >
+            <HaqBadge />
           </motion.div>
-          </AnimatePresence>
+        </AnimatePresence>
         <Button onClick={onSpinAgain} className='mt-4' variant={'ghost'}>
-            <X />
-          </Button>
+          <X />
+        </Button>
       </div>
     </motion.div>
 

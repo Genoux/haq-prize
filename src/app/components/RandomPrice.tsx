@@ -87,10 +87,9 @@ export const RandomPrizePicker = () => {
         if (elapsedTime < spinDuration) {
           spinImages();
         } else {
-          setSpinning(false);
           setCurrentPrize(chosenPrize);
           setWinner(chosenPrize.name);
-          setTimeout(() => setShowPrizeBanner(true), 500);
+          setTimeout(() => setShowPrizeBanner(true), 1250);
         }
       }, newInterval);
     };
@@ -114,7 +113,10 @@ export const RandomPrizePicker = () => {
         isVisible={showPrizeBanner}
         prizeNumber={selectedPrize?.weight || 0}
         winner={selectedPrize}
-        onSpinAgain={() => setShowPrizeBanner(false)}
+        onSpinAgain={() => {
+          setShowPrizeBanner(false);
+          setSpinning(false)
+        }}
       />
       <div
         className="fixed top-0 left-0 -z-50 w-full h-full  blur-xl opacity-30" style={{

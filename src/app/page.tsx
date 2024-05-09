@@ -1,11 +1,7 @@
 'use client'
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import TheWheel from "@/app/components/TheWheel";
-import { RandomPrizePicker, prizesList } from "./components/RandomPrice";
-import HomeHeader from "./components/HomeHeader";
-import { PrizePool } from "./components/PrizePool";
+import { RandomPrizePicker } from "./components/RandomPrice";
 import HaqBadge from "./components/HaqBadge";
 
 export default function Home() {
