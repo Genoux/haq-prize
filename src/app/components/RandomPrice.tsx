@@ -47,7 +47,7 @@ function getRandomImage(prizes: ImageInfo[]): ImageInfo {
 
 function calculateIntervals(totalDuration: number, rotations: number, imageCount: number): [number, number] {
   const initialInterval = totalDuration / (rotations * imageCount * 2);
-  const finalInterval = totalDuration / (rotations * imageCount) * 3;
+  const finalInterval = totalDuration / (rotations * imageCount) * 8;
   return [initialInterval, finalInterval];
 }
 
@@ -58,9 +58,10 @@ export const RandomPrizePicker = () => {
   const [spinning, setSpinning] = useState(false);
   const [showPrizeBanner, setShowPrizeBanner] = useState(false);
   const [winner, setWinner] = useState<string | null>(null);
+  const [zoomIn, setZoomIn] = useState(false);
 
-  const spinDuration = 8000;
-  const rotations = 10;
+  const spinDuration = 15000;
+  const rotations = 25;
   const [initialInterval, finalInterval] = useMemo(
     () => calculateIntervals(spinDuration, rotations, prizesList.length),
     [spinDuration, rotations]
@@ -83,13 +84,18 @@ export const RandomPrizePicker = () => {
       interval = setTimeout(() => {
         currentIndex = (currentIndex + 1) % prizes.length;
         setCurrentPrize(prizes[currentIndex]);
+        setZoomIn(false);
 
         if (elapsedTime < spinDuration) {
           spinImages();
         } else {
           setCurrentPrize(chosenPrize);
           setWinner(chosenPrize.name);
-          setTimeout(() => setShowPrizeBanner(true), 300);
+
+          setTimeout(() => {
+            setZoomIn(true);
+            setShowPrizeBanner(true)
+          }, 800);
         }
       }, newInterval);
     };
@@ -104,6 +110,7 @@ export const RandomPrizePicker = () => {
     setSelectedPrize(null);
     setSpinning(true);
     setWinner(null);
+    setZoomIn(false);
     setShowPrizeBanner(false);
   };
 
@@ -115,25 +122,37 @@ export const RandomPrizePicker = () => {
         winner={selectedPrize}
         onSpinAgain={() => {
           setShowPrizeBanner(false);
-          setSpinning(false)
+          setSpinning(false);
+          setZoomIn(false);
         }}
       />
       <div
-        className="fixed top-0 left-0 -z-50 w-full h-full  blur-xl opacity-30" style={{
+        className="fixed top-0 left-0 -z-10 w-full h-full blur-xl opacity-30"
+        style={{
           backgroundImage: `url(${currentPrize.src})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}>
-        <div className="-z-60 bg-gradient-to-l absolute top-0 left-0 w-full h-full from-black via-transparent to-black"></div>
-
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="-z-10 bg-gradient-to-l absolute top-0 left-0 w-full h-full from-black via-transparent to-black"></div>
       </div>
-      <div className="z-10 flex flex-col justify-center items-center gap-4 max-w-xs mx-auto">
-        <AnimatePresence mode="wait">
-          <motion.div key={currentPrize.src} className="flex flex-col gap-4 items-center border bg-black bg-opacity-20 p-4 rounded-md">
-            <Image src={currentPrize.src} alt={currentPrize.name} width={325} height={325} className="rounded-sm" />
-            <p className="text-xl font-bold">{currentPrize.name}</p>
+      <div className="flex flex-col justify-center items-center gap-4 max-w-xs mx-auto">
+        {/* <AnimatePresence mode="wait"> */}
+        <div className="flex flex-col gap-4 items-center border bg-black bg-opacity-20 p-4 rounded-md">
+
+          <motion.div
+            key={currentPrize.src}
+            initial={{ scale: 1 }}
+            animate={{ scale: zoomIn ? 1 : 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Image alt={currentPrize?.name} src={currentPrize?.src} width={312} height={312} className='rounded-md' />
           </motion.div>
-        </AnimatePresence>
+          <p className="text-xl font-bold">{currentPrize.name}</p>
+
+        </div>
+
+        {/* </AnimatePresence> */}
         <div className="flex gap-4 w-full">
           <Button onClick={handleSpinButtonClick} disabled={spinning} className="w-full">
             {spinning ? <Loading /> : "GO!"}
