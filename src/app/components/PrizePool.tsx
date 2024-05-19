@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/app/components/ui/dialog"
-import { Info } from 'lucide-react'
+} from "@/app/components/ui/dialog";
+import { Info } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/app/components/ui/button";
 type PrizePoolProps = {
@@ -17,9 +17,10 @@ export const PrizePool: React.FC<PrizePoolProps> = ({ prizes }) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant={'outline'}>
+        <Button variant={"outline"}>
           <Info className="mr-2 h-4 w-4" /> Les prix
-        </Button></DialogTrigger>
+        </Button>
+      </DialogTrigger>
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle className="mb-4">Les prix à gagner</DialogTitle>
@@ -34,7 +35,9 @@ export const PrizePool: React.FC<PrizePoolProps> = ({ prizes }) => {
                   className="rounded-sm"
                 />
                 <div>
-                  <h2 className="font-normal text-white text-xs">{prize.name}</h2>
+                  <h2 className="font-normal text-white text-xs">
+                    {prize.name}
+                  </h2>
                   <p>{prize.description}</p>
                 </div>
               </div>
@@ -43,6 +46,5 @@ export const PrizePool: React.FC<PrizePoolProps> = ({ prizes }) => {
         </DialogHeader>
       </DialogContent>
     </Dialog>
-
   );
 };

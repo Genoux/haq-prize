@@ -1,3 +1,5 @@
+'use client'
+ 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,11 +15,15 @@ interface ImageInfo {
 }
 
 export const prizesList: ImageInfo[] = [
-  { name: "Skin Mystère", src: "/images/mystere.png", weight: 90 },
-  { name: "Skin Mystère 950", src: "/images/mystere950.png", weight: 70 },
-  { name: "Skin Légendaire", src: "/images/legendaire.png", weight: 50 },
-  { name: "Skin Ultimate", src: "/images/ultimate.png", weight: 25 },
-  { name: "Choix des commentateurs", src: "/images/casterchoice.png", weight: 10 },
+  { name: "Skin Mystère", src: "/images/mystere.png", weight: 35 },
+  { name: "Skin Mystère 950", src: "/images/mystere950.png", weight: 30 },
+  { name: "Skin Légendaire", src: "/images/legendaire.png", weight: 16 },
+  { name: "Skin Ultimate", src: "/images/ultimate.png", weight: 11 },
+  {
+    name: "Choix des commentateurs",
+    src: "/images/casterchoice.png",
+    weight: 8,
+  },
 ];
 
 function lerp(start: number, end: number, t: number): number {
@@ -45,9 +51,13 @@ function getRandomImage(prizes: ImageInfo[]): ImageInfo {
   return prizes[0];
 }
 
-function calculateIntervals(totalDuration: number, rotations: number, imageCount: number): [number, number] {
+function calculateIntervals(
+  totalDuration: number,
+  rotations: number,
+  imageCount: number,
+): [number, number] {
   const initialInterval = totalDuration / (rotations * imageCount * 2);
-  const finalInterval = totalDuration / (rotations * imageCount) * 8;
+  const finalInterval = (totalDuration / (rotations * imageCount)) * 8;
   return [initialInterval, finalInterval];
 }
 
@@ -61,10 +71,10 @@ export const RandomPrizePicker = () => {
   const [zoomIn, setZoomIn] = useState(false);
 
   const spinDuration = 15000;
-  const rotations = 25;
+  const rotations = 20;
   const [initialInterval, finalInterval] = useMemo(
     () => calculateIntervals(spinDuration, rotations, prizesList.length),
-    [spinDuration, rotations]
+    [spinDuration, rotations],
   );
 
   useEffect(() => {
@@ -94,8 +104,8 @@ export const RandomPrizePicker = () => {
 
           setTimeout(() => {
             setZoomIn(true);
-            setShowPrizeBanner(true)
-          }, 800);
+            setShowPrizeBanner(true);
+          }, 1000);
         }
       }, newInterval);
     };
@@ -130,8 +140,8 @@ export const RandomPrizePicker = () => {
         className="fixed top-0 left-0 -z-10 w-full h-full blur-xl opacity-30"
         style={{
           backgroundImage: `url(${currentPrize.src})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="-z-10 bg-gradient-to-l absolute top-0 left-0 w-full h-full from-black via-transparent to-black"></div>
@@ -139,22 +149,30 @@ export const RandomPrizePicker = () => {
       <div className="flex flex-col justify-center items-center gap-4 max-w-xs mx-auto">
         {/* <AnimatePresence mode="wait"> */}
         <div className="flex flex-col gap-4 items-center border bg-black bg-opacity-20 p-4 rounded-md">
-
           <motion.div
             key={currentPrize.src}
             initial={{ scale: 1 }}
             animate={{ scale: zoomIn ? 1 : 1 }}
             transition={{ duration: 0.2 }}
           >
-            <Image alt={currentPrize?.name} src={currentPrize?.src} width={312} height={312} className='rounded-md' />
+            <Image
+              alt={currentPrize?.name}
+              src={currentPrize?.src}
+              width={312}
+              height={312}
+              className="rounded-md"
+            />
           </motion.div>
           <p className="text-xl font-bold">{currentPrize.name}</p>
-
         </div>
 
         {/* </AnimatePresence> */}
         <div className="flex gap-4 w-full">
-          <Button onClick={handleSpinButtonClick} disabled={spinning} className="w-full">
+          <Button
+            onClick={handleSpinButtonClick}
+            disabled={spinning}
+            className="w-full"
+          >
             {spinning ? <Loading /> : "GO!"}
           </Button>
           <PrizePool prizes={prizesList} />

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/app/components/theme-provider"
+import { ThemeProvider } from "@/app/components/theme-provider";
 import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
@@ -9,16 +9,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        media: '(prefers-color-scheme: light)',
-        url: '/images/favicon/favicon-light.ico',
-        href: '/images/favicon/favicon-light.ico',
-      },
-      {
-        media: '(prefers-color-scheme: dark)',
-        url: '/images/favicon/favicon-dark.ico',
-        href: '/images/favicon/favicon-dark.ico',
+        url: "https://sdedknsmucuwsvgfxrxs.supabase.co/storage/v1/object/public/Assets/favicon.png",
+        href: "https://sdedknsmucuwsvgfxrxs.supabase.co/storage/v1/object/public/Assets/favicon.png",
       },
     ],
+  },
+  openGraph: {
+    images:
+      "https://sdedknsmucuwsvgfxrxs.supabase.co/storage/v1/object/public/Assets/opengraph-image.jpg",
   },
 };
 
@@ -34,7 +32,8 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem
-          disableTransitionOnChange>
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>

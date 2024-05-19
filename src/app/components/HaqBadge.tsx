@@ -1,5 +1,4 @@
-import { Logo } from 'haq-assets'
-
+import { Logo } from "haq-assets";
 
 export default function HaqBadge() {
   return (
