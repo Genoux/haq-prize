@@ -15,13 +15,13 @@ interface ImageInfo {
 }
 
 export const prizesList: ImageInfo[] = [
-  { name: "Skin Mystère", src: "/images/mystere.png", weight: 35 },
-  { name: "Skin Mystère 950", src: "/images/mystere950.png", weight: 30 },
-  { name: "Skin Légendaire", src: "/images/legendaire.png", weight: 16 },
-  { name: "Skin Ultimate", src: "/images/ultimate.png", weight: 11 },
+  { name: "Skin Mystère", src: "/images/mystere.webp", weight: 35 },
+  { name: "Skin Mystère 950", src: "/images/mystere950.webp", weight: 30 },
+  { name: "Skin Légendaire", src: "/images/legendaire.webp", weight: 16 },
+  { name: "Skin Ultimate", src: "/images/ultimate.webp", weight: 11 },
   {
     name: "Choix des commentateurs",
-    src: "/images/casterchoice.png",
+    src: "/images/casterchoice.webp",
     weight: 8,
   },
 ];
