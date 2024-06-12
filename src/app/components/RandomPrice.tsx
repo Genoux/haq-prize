@@ -70,7 +70,7 @@ export const RandomPrizePicker = () => {
   const [winner, setWinner] = useState<string | null>(null);
   const [zoomIn, setZoomIn] = useState(false);
 
-  const spinDuration = 15000;
+  const spinDuration = 8000;
   const rotations = 20;
   const [initialInterval, finalInterval] = useMemo(
     () => calculateIntervals(spinDuration, rotations, prizesList.length),
