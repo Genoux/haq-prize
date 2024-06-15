@@ -20,7 +20,7 @@ export const prizesList: ImageInfo[] = [
   { name: "Skin Légendaire", src: "/images/legendaire.webp", weight: 16 },
   { name: "Skin Ultimate", src: "/images/ultimate.webp", weight: 11 },
   {
-    name: "Choix des commentateurs",
+    name: "Commentateurs",
     src: "/images/casterchoice.webp",
     weight: 8,
   },
@@ -71,7 +71,7 @@ export const RandomPrizePicker = () => {
   const [zoomIn, setZoomIn] = useState(false);
 
   const spinDuration = 8000;
-  const rotations = 20;
+  const rotations = 16;
   const [initialInterval, finalInterval] = useMemo(
     () => calculateIntervals(spinDuration, rotations, prizesList.length),
     [spinDuration, rotations],
@@ -146,7 +146,7 @@ export const RandomPrizePicker = () => {
       >
         <div className="-z-10 bg-gradient-to-l absolute top-0 left-0 w-full h-full from-black via-transparent to-black"></div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-4 max-w-xs mx-auto">
+      <div className="flex flex-col justify-center items-center gap-2 max-w-xs mx-auto">
         {/* <AnimatePresence mode="wait"> */}
         <div className="flex flex-col gap-4 items-center border bg-black bg-opacity-20 p-4 rounded-md">
           <motion.div
@@ -167,11 +167,11 @@ export const RandomPrizePicker = () => {
         </div>
 
         {/* </AnimatePresence> */}
-        <div className="flex gap-4 w-full">
+        <div className="flex gap-2 w-full items-center">
           <Button
             onClick={handleSpinButtonClick}
             disabled={spinning}
-            className="w-full"
+            className="w-full h-11 rounded-sm"
           >
             {spinning ? <Loading /> : "GO!"}
           </Button>

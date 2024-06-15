@@ -17,25 +17,25 @@ export const PrizePool: React.FC<PrizePoolProps> = ({ prizes }) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant={"outline"}>
-          <Info className="mr-2 h-4 w-4" /> Les prix
+        <Button variant={"outline"} className="h-12 rounded-md">
+          <Info className="mr-2 h-full w-4" /> Les prix
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl">
+      <DialogContent className="max-w-7xl">
         <DialogHeader>
-          <DialogTitle className="mb-4">Les prix à gagner</DialogTitle>
-          <DialogDescription className="grid grid-cols-3 sm:flex gap-4 justify-between ">
+          <DialogTitle className="mb-4">Prix à gagner</DialogTitle>
+          <DialogDescription className="grid grid-cols-3 md:grid-cols-5 gap-4 justify-between ">
             {prizes.map((prize, index) => (
-              <div key={index} className="flex items-start flex-col gap-2">
+              <div key={index} className="flex items-center flex-col gap-2 relative">
                 <Image
                   src={prize.src}
                   alt={prize.name}
-                  width={300}
+                  width={500}
                   height={300}
                   className="rounded-sm"
                 />
-                <div>
-                  <h2 className="font-normal text-white text-xs">
+                <div className="h-full py-2 flex items-center justify-center w-full gap-2 bg-zinc-900 rounded-sm bg-opacity-20 border">
+                  <h2 className="text-white text-sm font-semibold text-center">
                     {prize.name}
                   </h2>
                   <p>{prize.description}</p>

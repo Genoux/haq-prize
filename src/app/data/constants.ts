@@ -24,7 +24,7 @@ export const CHOICES = [
     style: { backgroundColor: "#00FF85" },
   },
   {
-    name: "Choix des commentateurs",
+    name: "Commentateurs",
     option: "",
     optionSize: 8,
     style: { backgroundColor: "#FF2459" },
